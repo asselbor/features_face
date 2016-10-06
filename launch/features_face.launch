@@ -1,9 +1,24 @@
 <launch>
 
-  <arg name="pathOpenFace" value="/home/asselbor/catkin_ws/src/features_face/OpenFace" /> 
+    <node pkg="features_face" type="executable_launcher.py" name="executable_launcher">
+  		<param name="pathOpenFace" value="/home/asselbor/catkin_ws/src/features_face/OpenFace" /> 
+    </node>
 
 
-  <node pkg="features_face" type="executable_launcher.py" name="executable_launcher">
-  </node>
+	<node pkg="features_face" type="detect_gaze_match.py" name="detect_gaze_match">
+	  	
+	  	<param name="positionX1_r1" value="0.3" />
+		<param name="positionX2_r1" value="0.7" />
+		<param name="positionX1_r2" value="-0.3" />
+		<param name="positionX2_r2" value="-0.7" />
+		<param name="positionY1_r12" value="0.5" />
+		<param name="positionY2_r12" value="-0.6" />
+		<param name="positionX1_tab" value="-0.1" />
+		<param name="positionX2_tab" value="0.1" />
+		<param name="positionY_tab" value="0.2" />
+		<param name="topic_gaze_match" value="topic_gaze_match" />
+		<param name="topic_gaze" value="topic_gaze" />
+		
+ 	 </node>
 
 </launch>

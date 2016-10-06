@@ -29,6 +29,8 @@
 
 // topic in global variable
 ros::Publisher pub_feature;
+ros::Publisher pub_gaze;
+ros::Publisher pub_headPose;
 
 
 #define INFO_STREAM( stream ) \
@@ -183,6 +185,9 @@ int main (int argc, char **argv)
 	ros::init(argc, argv, "features_extractor");
 	ros::NodeHandle n;
 	pub_feature = n.advertise<std_msgs::Float32MultiArray>("topic_features", 5000);
+	pub_gaze = n.advertise<std_msgs::Float32MultiArray>("topic_gaze", 5000);
+	//pub_headPose = n.advertise<std_msgs::Float32MultiArray>("topic_headPose", 5000);
+
 	ros::Rate loop_rate(0.1);
 
 
@@ -216,7 +221,7 @@ int main (int argc, char **argv)
 	// Grab camera parameters, if they are not defined (approximate values will be used)
 	float fx = 0, fy = 0, cx = 0, cy = 0;
 	// By default try webcam 0
-	int device = 0;
+	int device = 1;
 	// Get camera parameters
 	LandmarkDetector::get_camera_params(device, fx, fy, cx, cy, arguments);    
 	
@@ -614,9 +619,9 @@ void outputAllFeatures(std::ofstream* output_file, bool output_2D_landmarks, boo
 	const FaceAnalysis::FaceAnalyser& face_analyser)
 {
 	// prepare message to send in topic
-	std_msgs::Float32MultiArray array;
-	//clear array
-	array.data.clear();
+	std_msgs::Float32MultiArray arrayGaze;
+	std_msgs::Float32MultiArray arrayFeatures;
+	std_msgs::Float32MultiArray arrayHeadPose;
 
 
 	double confidence = 0.5 * (1 - face_model.detection_certainty);
@@ -626,12 +631,12 @@ void outputAllFeatures(std::ofstream* output_file, bool output_2D_landmarks, boo
 	// Output the estimated gaze
 	if (output_gaze)
 	{
-		array.data.push_back(gazeDirection0.x);
-		array.data.push_back(gazeDirection0.y);
-		array.data.push_back(gazeDirection0.z);
-		array.data.push_back(gazeDirection1.x);
-		array.data.push_back(gazeDirection1.y);
-		array.data.push_back(gazeDirection1.z);
+		arrayGaze.data.push_back(gazeDirection0.x);
+		arrayGaze.data.push_back(gazeDirection0.y);
+		arrayGaze.data.push_back(gazeDirection0.z);
+		arrayGaze.data.push_back(gazeDirection1.x);
+		arrayGaze.data.push_back(gazeDirection1.y);
+		arrayGaze.data.push_back(gazeDirection1.z);
 
 		*output_file << ", " << gazeDirection0.x << ", " << gazeDirection0.y << ", " << gazeDirection0.z
 			<< ", " << gazeDirection1.x << ", " << gazeDirection1.y << ", " << gazeDirection1.z;
@@ -640,12 +645,20 @@ void outputAllFeatures(std::ofstream* output_file, bool output_2D_landmarks, boo
 	// Output the estimated head pose
 	if (output_pose)
 	{
-		array.data.push_back(pose_estimate[0]);
-		array.data.push_back(pose_estimate[1]);
-		array.data.push_back(pose_estimate[2]);
-		array.data.push_back(pose_estimate[3]);
-		array.data.push_back(pose_estimate[4]);
-		array.data.push_back(pose_estimate[5]);
+		
+		arrayGaze.data.push_back(pose_estimate[3]);
+		arrayGaze.data.push_back(pose_estimate[4]);
+		arrayGaze.data.push_back(pose_estimate[5]);
+		arrayGaze.data.push_back(pose_estimate[0]);
+		arrayGaze.data.push_back(pose_estimate[1]);
+		arrayGaze.data.push_back(pose_estimate[2]);
+
+		//arrayHeadPose.data.push_back(pose_estimate[3]);
+		//arrayHeadPose.data.push_back(pose_estimate[4]);
+		//arrayHeadPose.data.push_back(pose_estimate[5]);
+		//arrayHeadPose.data.push_back(pose_estimate[0]);
+		//arrayHeadPose.data.push_back(pose_estimate[1]);
+		//arrayHeadPose.data.push_back(pose_estimate[2]);
 
 		*output_file << ", " << pose_estimate[0] << ", " << pose_estimate[1] << ", " << pose_estimate[2]
 			<< ", " << pose_estimate[3] << ", " << pose_estimate[4] << ", " << pose_estimate[5];
@@ -703,7 +716,7 @@ void outputAllFeatures(std::ofstream* output_file, bool output_2D_landmarks, boo
 			{
 				if (au_name.compare(au_reg.first) == 0)
 				{
-					array.data.push_back(au_reg.second);
+					arrayFeatures.data.push_back(au_reg.second);
 					*output_file << ", " << au_reg.second;
 					break;
 				}
@@ -745,7 +758,9 @@ void outputAllFeatures(std::ofstream* output_file, bool output_2D_landmarks, boo
 		}
 	}
 
-	pub_feature.publish(array);
+	pub_feature.publish(arrayFeatures);
+	pub_gaze.publish(arrayGaze);
+	pub_headPose.publish(arrayHeadPose);
 
 	*output_file << endl;
 }
