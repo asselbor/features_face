@@ -215,7 +215,7 @@ DLIB_ENABLE_STACK_TRACE:BOOL=OFF
 // (i.e. you don't use any of the API Wrappers)
 DLIB_ISO_CPP_ONLY:BOOL=OFF
 
-//Disable this if you don't want to link against sqlite3
+//Disable this if you don't want to link against fftw
 DLIB_LINK_WITH_FFTW:STRING=OFF
 
 //Disable this if you don't want to link against libjpeg

@@ -90,8 +90,8 @@ FeatureExtraction_EXTERNAL_OBJECTS =
 
 bin/FeatureExtraction: exe/FeatureExtraction/CMakeFiles/FeatureExtraction.dir/FeatureExtraction.cpp.o
 bin/FeatureExtraction: exe/FeatureExtraction/CMakeFiles/FeatureExtraction.dir/build.make
-bin/FeatureExtraction: lib/local/LandmarkDetector/libLandmarkDetector.a
-bin/FeatureExtraction: lib/local/FaceAnalyser/libFaceAnalyser.a
+bin/FeatureExtraction: lib/local/LandmarkDetector/libLandmarkDetector.so
+bin/FeatureExtraction: lib/local/FaceAnalyser/libFaceAnalyser.so
 bin/FeatureExtraction: lib/3rdParty/dlib/libdlib.a
 bin/FeatureExtraction: /opt/ros/kinetic/lib/libopencv_xphoto3.so.3.1.0
 bin/FeatureExtraction: /opt/ros/kinetic/lib/libopencv_xobjdetect3.so.3.1.0
@@ -131,15 +131,15 @@ bin/FeatureExtraction: /opt/ros/kinetic/lib/librosconsole_log4cxx.so
 bin/FeatureExtraction: /opt/ros/kinetic/lib/librosconsole_backend_interface.so
 bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
 bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libboost_regex.so
-bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libboost_chrono.so
-bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
 bin/FeatureExtraction: /opt/ros/kinetic/lib/libxmlrpcpp.so
 bin/FeatureExtraction: /opt/ros/kinetic/lib/libroscpp_serialization.so
 bin/FeatureExtraction: /opt/ros/kinetic/lib/librostime.so
-bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
 bin/FeatureExtraction: /opt/ros/kinetic/lib/libcpp_common.so
 bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libboost_system.so
 bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libboost_thread.so
+bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libboost_chrono.so
+bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
+bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
 bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libpthread.so
 bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so
 bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libnsl.so
@@ -177,14 +177,14 @@ bin/FeatureExtraction: /opt/ros/kinetic/lib/librosconsole_log4cxx.so
 bin/FeatureExtraction: /opt/ros/kinetic/lib/librosconsole_backend_interface.so
 bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
 bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libboost_regex.so
-bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libboost_chrono.so
-bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
 bin/FeatureExtraction: /opt/ros/kinetic/lib/libxmlrpcpp.so
 bin/FeatureExtraction: /opt/ros/kinetic/lib/libroscpp_serialization.so
 bin/FeatureExtraction: /opt/ros/kinetic/lib/librostime.so
-bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
 bin/FeatureExtraction: /opt/ros/kinetic/lib/libcpp_common.so
 bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libboost_thread.so
+bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libboost_chrono.so
+bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
+bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
 bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libpthread.so
 bin/FeatureExtraction: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so
 bin/FeatureExtraction: exe/FeatureExtraction/CMakeFiles/FeatureExtraction.dir/link.txt
